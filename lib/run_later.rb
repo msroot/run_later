@@ -29,9 +29,12 @@ module RunLater
       IO.popen("/bin/bash", "w") do |shell|
 
         ["$HOME/.rvmrc", "$HOME/.profile"].map {|source|
-          shell.puts(". #{source}")
+          say "Loading #{source}", :green
+          
+          shell.puts("source #{source}")
         }
-        
+
+        shell.puts("echo #{Time.now} >> #{log}")
         shell.puts("sudo #{defaults[:file]} >> #{log}")
       end
       
