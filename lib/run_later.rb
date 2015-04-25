@@ -29,7 +29,7 @@ module RunLater
       
       # puts `#{defaults[:scripts]}  /bin/bash #{defaults[:file]} >> #{log}`
       IO.popen("/bin/bash", "w") do |shell|
-        
+
         ["$HOME/.rvmrc", "$HOME/.profile"].map {|source|
           shell.puts(". #{source}")
         }

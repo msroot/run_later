@@ -1,6 +1,10 @@
 # RunLater
 
-	$ run_later --commands="[[ -s /Users/Ioannis/.profile ]] && source /Users/Ioannis/.profile"
+	$ run_later --commands="brew upgrade && brew install phantomjs"
+
+later:
+
+	$  run_later perform
 
 ## Installation
 
