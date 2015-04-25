@@ -22,14 +22,12 @@ module RunLater
     desc "perform", "Perform and save log"
     def perform
       say "Not file found #{defaults[:file]}", :red and return unless file_exist?
-      
+          
       log = defaults[:log]
       
         open(defaults[:file], 'r').each_line do |command|
-          # _command = IO.popen("#{command}") { |f| puts f.gets }
-          say "Running #{command}"
-          
-          system("echo $(""#{command}"") >> #{log}")
+          say "Running command: #{command}", :yellow
+          puts `#{defaults[:scripts]} #{command} >> #{log}`
       end
       say "Done! Log saved in #{log}", :green
     end
@@ -42,10 +40,14 @@ module RunLater
       {
         root: File.join(ENV['HOME'], '.run_later'),
         file: File.join(root, 'commands'),
-        log: File.join(root, "log_#{Time.now.to_i}")
+        log: File.join(root, "run_later.log"),
+        scripts: load_scripts
       }
     end
   
+    def load_scripts
+       ["$HOME/.rvmrc", "$HOME/.profile"].map{|source| "source #{source} &&"}.join
+    end
     def file_exist?
       File.exist? defaults[:file]
     end
@@ -66,3 +68,4 @@ end
 # Some Bash syntax is not supported by /bin/sh on all systems.
 
 # http://stackoverflow.com/questions/2232/calling-shell-commands-from-ruby
+# http://tech.natemurray.com/2007/03/ruby-shell-commands.html
