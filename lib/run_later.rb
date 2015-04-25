@@ -25,23 +25,37 @@ module RunLater
           
       log = defaults[:log]
       
-      defaults[:file]
+      
       
       # puts `#{defaults[:scripts]}  /bin/bash #{defaults[:file]} >> #{log}`
-
-      
-        open(defaults[:file], 'r').each_line do |line|
-          say "Running command: #{line}", :yellow
-          
-          # puts `#{defaults[:scripts]} ./commands.sh  #{command} >> #{log}`
-          next if line.start_with? '#'
-          puts `eval$("#{line}") >> #{log}`
-          
+      IO.popen("/bin/bash", "w") do |shell|
+        
+        ["$HOME/.rvmrc", "$HOME/.profile"].map {|source|
+          shell.puts(". #{source}")
+        }
+        
+        shell.puts("sudo #{defaults[:file]} >> #{log}")
       end
+      
+      
+      #   open(defaults[:file], 'r').each_line do |line|
+      #     say "Running command: #{line}", :yellow
+      #     next if line.start_with? '#'
+      #     # puts `#{defaults[:scripts]} ./commands.sh  #{command} >> #{log}`
+      #     # puts `eval$("#{line}") >> #{log}`
+      # end
       say "Done! Log saved in #{log}", :green
     end
 
 
+
+    desc "clean", "clean"
+    def clean
+      # FileUtils.rm(defaults[:root])
+      `rm -rf #{defaults[:root]}`
+    end
+    
+    
     private
     def defaults
       root = File.join(ENV['HOME'], '.run_later')
