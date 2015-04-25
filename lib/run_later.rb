@@ -25,8 +25,6 @@ module RunLater
           
       log = defaults[:log]
       
-      
-      
       # puts `#{defaults[:scripts]}  /bin/bash #{defaults[:file]} >> #{log}`
       IO.popen("/bin/bash", "w") do |shell|
 
