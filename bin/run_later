@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'run_later'
+RunLater::CLI.start(ARGV)
