@@ -1,6 +1,6 @@
 # RunLater
 
-TODO: Write a gem description
+	$ run_later --commands="[[ -s /Users/Ioannis/.profile ]] && source /Users/Ioannis/.profile"
 
 ## Installation
 
