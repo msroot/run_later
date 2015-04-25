@@ -10,6 +10,10 @@ module RunLater
     default_task :queue
     desc "queue", "Queue commands"
     method_option :commands, :type => :string, :required => true
+    long_desc <<-LONGDESC
+      Will create a file in ~/.run_later/commands.sh
+      and write the commands
+      LONGDESC
     def queue
       initialize_directory!
       
@@ -20,6 +24,12 @@ module RunLater
     end
 
     desc "perform", "Perform and save log"
+    long_desc <<-LONGDESC
+      
+      Will sourced all files required and after will run the genereted script
+      located in ~/.run_later/commands.sh
+      
+      LONGDESC
     def perform
       say "Not file found #{defaults[:file]}", :red and return unless file_exist?
           
@@ -30,7 +40,6 @@ module RunLater
 
         ["$HOME/.rvmrc", "$HOME/.profile"].map {|source|
           say "Loading #{source}", :green
-          
           shell.puts("source #{source}")
         }
 
@@ -38,13 +47,6 @@ module RunLater
         shell.puts("sudo #{defaults[:file]} >> #{log}")
       end
       
-      
-      #   open(defaults[:file], 'r').each_line do |line|
-      #     say "Running command: #{line}", :yellow
-      #     next if line.start_with? '#'
-      #     # puts `#{defaults[:scripts]} ./commands.sh  #{command} >> #{log}`
-      #     # puts `eval$("#{line}") >> #{log}`
-      # end
       say "Done! Log saved in #{log}", :green
     end
 
@@ -56,7 +58,7 @@ module RunLater
       `rm -rf #{defaults[:root]}`
     end
     
-    
+    # TODO: user confige with defaults files to load
     private
     def defaults
       root = File.join(ENV['HOME'], '.run_later')

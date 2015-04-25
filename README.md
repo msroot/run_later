@@ -1,5 +1,9 @@
 # RunLater
 
+RunLater is a gem for running commands later. 
+It saves the commands in a script file located in `~/.run_later/commands.sh` and executed it when you call `:perform`
+
+
 	$ run_later --commands="brew upgrade && brew install phantomjs"
 
 later:
@@ -28,7 +32,7 @@ TODO: Write usage instructions here
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/run_later/fork )
+1. Fork it ( https://github.com/msroot/run_later/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
