@@ -63,13 +63,15 @@ module RunLater
         shell.puts("echo #{Time.now} >> #{log}")
       
         get_commands.map{ |command|
+          line = '--------------------------'
           
-          say "-------------------------- Starting: #{command[:id]} --------------------------", :yellow
+          say "#{line} Starting: #{Time.now} #{line}", :yellow
           
+          say_status "ID",  command[:id]
           
           # load preloads
           command[:preload].each {|source|
-            say "Loading: #{source}", :green
+            say_status "Loading:",  source
             # shell.puts("source #{source}")
             system("source #{source}")
           }
@@ -77,19 +79,25 @@ module RunLater
           # load env
           command[:env].each {|key, value|
             env = "#{key}=#{value}"
-            say "Setting ENV: #{env}", :green
+            say_status "Setting ENV", env
             system("export #{env}")
             # shell.puts("source #{source}")
           }
         
         
-          say "Running: #{command[:commands]}", :yellow
+          say_status "Running", command[:commands], :yellow
           # shell.puts("sudo #{command[:commands]} >> #{log}")
-          system("#{command[:commands]} >> #{log}")
-
+          success = system("#{command[:commands]} >> #{log}")
+          
+          
+          say_status 'Success', success, (success ? :green : :red)
+          
         }
 
-        say "Done! Log saved in #{log}", :green
+        say_status "Output saved", log,  :green
+
+        
+        
       end
     end
 
