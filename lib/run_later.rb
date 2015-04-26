@@ -130,7 +130,7 @@ module RunLater
             say_status "Setting ENV", env
             system("export #{env}")
             # shell.puts("source #{source}")
-          }
+            } unless command[:env].nil?
         
         
           say_status "Running", command[:commands], :yellow
@@ -138,7 +138,7 @@ module RunLater
           success = system("#{command[:commands]} >> #{log}")
           
           
-          say_status 'Success', success, (success ? :green : :red)
+          say_status 'Status', (success ? "🍺" : "😩" ), (success ? :green : :red)
           
         }
 
