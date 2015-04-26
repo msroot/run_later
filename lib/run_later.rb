@@ -31,7 +31,7 @@ module RunLater
 
       log = defaults[:log]
 
-      shell = IO.popen("/bin/bash", "w")
+      IO.popen("/bin/bash", "w") do |shell|
 
       shell.puts("echo #{Time.now} >> #{log}")
       
@@ -42,12 +42,12 @@ module RunLater
           shell.puts("source #{source}")        
         }
 
-        
         say "Running: #{command[:commands]}", :yellow
         shell.puts("sudo #{command[:commands]} >> #{log}")
       }
 
       say "Done! Log saved in #{log}", :green
+    end
     end
     
 
