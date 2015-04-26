@@ -37,18 +37,24 @@ module RunLater
       
       get_commands.map{ |command|
         
-        command[:preload].each {|source|
-          say "Loading: #{source}", :green
-          shell.puts("source #{source}")        
-        }
-
+        # command[:preload].each {|source|
+        #           say "Loading: #{source}", :green
+        #           shell.puts("source #{source}")
+        #         }
+        
+        
         say "Running: #{command[:commands]}", :yellow
-        shell.puts("sudo #{command[:commands]} >> #{log}")
+        # shell.puts("sudo #{command[:commands]} >> #{log}")
+        # csh -c 'source ~/.profile && ls' -x    
+        exec "csh -c 'source #{command[:preload].join} && #{command[:commands]}' -x"
+        
       }
 
       say "Done! Log saved in #{log}", :green
     end
     end
+    
+    
     
 
     desc "clean", "clean"
@@ -66,6 +72,8 @@ module RunLater
 
     def defaults
       root = File.join(ENV['HOME'], '.run_later')
+      env = '/usr/bin/env'
+      set = 'set'
       
       {
         root: root,
