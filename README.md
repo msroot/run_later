@@ -1,10 +1,13 @@
 # RunLater
 
 RunLater is a gem for running commands later. 
-It saves the commands in a script file located in `~/.run_later/commands.sh` and executed it when you call `:perform`
+It saves the commands in a script (`~/.run_later/commands.sh`) and executed it when you call `perform`
 
+Because when you running scripts with Ruby, systems commands are running with `sh` and doent load any file like `~/.profile` or `.~/.bash_profile` so you need to `preload` it
 
-	$ run_later --commands="brew upgrade && brew install phantomjs"
+## Usage
+
+	$ run_later --preload="~/.profile" --commands="brew upgrade && brew install phantomjs"
 
 later:
 
@@ -26,10 +29,7 @@ Or install it yourself as:
 
     $ gem install run_later
 
-## Usage
-
-TODO: Write usage instructions here
-
+@
 ## Contributing
 
 1. Fork it ( https://github.com/msroot/run_later/fork )
@@ -37,3 +37,29 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+
+## License
+
+Copyright (c) 2015 Ioannis Kolovos
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
