@@ -17,6 +17,12 @@
 #   $ run_later queue params # Adding commands 
 #   $ run_later clean # remove ~/.run_later
 #   $ run_later perform # executes the queue
+#   $ run_later list # view queue
+#    
+#    For more details use: 
+#      
+#   $ run_later help
+#
 #
 #   Sourcing: 
 #
