@@ -1,9 +1,9 @@
 # RunLater
 
 RunLater is a gem for running commands later. 
-It saves the commands in a script (`~/.run_later/commands.sh`) and executed it when you call `perform`
+It saves the commands in a yaml file (`~/.run_later/commands.yaml`) and executed it when you call `perform`
 
-Because when you running scripts with Ruby, systems commands are running with `sh` and doent load any file like `~/.profile` or `.~/.bash_profile` so you need to `preload` it
+Because when you running scripts with Ruby, systems commands are running with `sh` and doent `source` load any file like `~/.profile` or `.~/.bash_profile` so we need to `preload` it with before
 
 ## Usage
 
@@ -13,6 +13,11 @@ later:
 
 	$  run_later perform
 
+`--preload`: scripts to preload
+`--commands`:commands to run
+
+`-c` alias for `--commands`
+`-p` alias for `--preload`
 ## Installation
 
 Add this line to your application's Gemfile:
