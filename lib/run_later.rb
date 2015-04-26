@@ -1,3 +1,45 @@
+#   MIT License Copyright (c) 2015 Ioannis Kolovos
+#   See License
+#
+#   RunLater is a gem for running commands later.
+#   It saves the commands in a yaml file (`~/.run_later/commands.yaml`) and executed it when you call `perform`
+#
+#   Usage:
+#
+#   $ run_later queue --commands='brew upgrade && brew install phantomjs'
+#
+#   Later:
+#
+#   $  run_later perform
+#
+#   Methods:
+#       
+#   $ run_later queue params # Adding commands 
+#   $ run_later clean # remove ~/.run_later
+#   $ run_later perform # executes the queue
+#
+#   Sourcing: 
+#
+#   When you running system commands with Ruby, is using `sh`  so you have to load  sources  like `~/.profile` or `.~/.bash_profile`
+#   Default loaded are: ["~/.profile", "~/.bash_profile"]
+#
+#
+#   Options:
+#
+#
+#   --commands='brew upgrade && brew install phantomjs'  # Commands to execute
+#   --preload=~/.bash_profile ~/.rvmrc                   # Source files to be loaded before execution (separated by space)
+#                                                        # Default: ["~/.profile", "~/.bash_profile"]
+#   --sudo, --no-sudo                                    # If commands require sudo
+#   --env=foo:bar joe:doe                                # System variables to be set before execution (key:value separated by space)
+#
+#
+#   Example:
+#   $ run_later --commands='brew upgrade && brew install phantomjs' --sudo  --env=foo:bar joe:doe --preload=~/.bash_profile ~/.rvmrc  
+# 
+#
+
+
 require "run_later/version"
 require "thor"
 require 'yaml'
