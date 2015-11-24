@@ -51,7 +51,7 @@ run_later --commands='brew upgrade && brew install phantomjs' --sudo  --env=foo:
 Add this line to your application's Gemfile:
 
 ```ruby
-	gem 'run_later', :git => 'git://github.com/msroot/run_later.git'
+	gem 'run_later'
 ```
 
 And then execute:
