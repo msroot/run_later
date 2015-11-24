@@ -9,6 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ioannis Kolovos"]
   spec.email         = ["yannis.kolovos@gmail.com"]
   spec.summary       = "Run commands later"
+  spec.description   = "Save commands to be run later and run them"
   spec.homepage      = "https://github.com/msroot/run_later"
   spec.license       = "MIT"
 
